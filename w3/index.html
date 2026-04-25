@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKU ET 背景 + 海葵小丑魚</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      #bg-frame {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        z-index: 0;
+      }
+      #canvasContainer {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+      }
+      #help {
+        position: fixed;
+        bottom: 12px;
+        left: 12px;
+        z-index: 3;
+        color: white;
+        background: rgba(0,0,0,0.45);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+    </style>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
+  <body>
+    <iframe id="bg-frame" src="https://www.et.tku.edu.tw/" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
+    <div id="canvasContainer"></div>
+    <div id="help">Press Space to toggle click-through (canvas). Now: off</div>
+    <script src="sketch.js"></script>
+    <script>
+      const container = document.getElementById('canvasContainer');
+      let clickThrough = true;
+
+      document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          clickThrough = !clickThrough;
+          container.style.pointerEvents = clickThrough ? 'none' : 'auto';
+          document.getElementById('help').innerText = 'Press Space to toggle click-through (canvas). Now: ' + (clickThrough ? 'off' : 'on');
+        }
+      });
+    </script>
+  </body>
+</html>
